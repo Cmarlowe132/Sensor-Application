@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
     private lateinit var recordButton: Button
     private lateinit var motionSensor: Sensor
+    private lateinit var sensorValueText: TextView
+    private var sensorValues: MutableList<List<Float>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +29,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             return
         }
         recordButton = findViewById(R.id.button)
-        recordButton.setOnClickListener { v: View ->
-            recordButton.text = "Stop"
-            beginRecording()
-        }
+        sensorValueText = findViewById(R.id.sensorValues)
+        resetButton()
     }
 
     private fun beginRecording() {
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             sensorManager.unregisterListener(this)
             recordButton.text = "Record"
             resetButton()
-
         }
 
     }
@@ -53,6 +53,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
+        if (event != null) {
+            sensorValues.add(listOf(event.values[0], event.values[1],event.values[2]))
+            sensorValueText.text=" " + event.values[0] + ", " + event.values[1] + ", " + event.values[2]
+        }
 
     }
 
