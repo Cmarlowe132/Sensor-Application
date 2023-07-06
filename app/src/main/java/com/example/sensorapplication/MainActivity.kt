@@ -10,12 +10,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import java.util.Arrays.asList
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
     private lateinit var recordButton: Button
-    private lateinit var motionSensor: Sensor
+
     private lateinit var sensorValueText: TextView
     private lateinit var listOfAvailableSensors: List<Sensor>
     private var sensorValues: MutableList<List<Float>> = ArrayList()
@@ -26,12 +27,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         listOfAvailableSensors = sensorManager.getSensorList(Sensor.TYPE_ALL)
         SensorList.listOfSensors = listOfAvailableSensors
+        InUseSensors.listOfInUseSensors = asList(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER))
         recordButton = findViewById(R.id.button)
         resetButton()
     }
 
     private fun beginRecording() {
-        motionSensor?.also { motion ->
+        for()
             sensorManager.registerListener(this, motion, SensorManager.SENSOR_DELAY_NORMAL)
         }
         recordButton.setOnClickListener { v: View ->
