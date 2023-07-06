@@ -17,19 +17,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var recordButton: Button
     private lateinit var motionSensor: Sensor
     private lateinit var sensorValueText: TextView
+    private lateinit var listOfAvailableSensors: List<Sensor>
     private var sensorValues: MutableList<List<Float>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        motionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        if(motionSensor == null) {
-            print("Movement Sensor not available")
-            return
-        }
+        listOfAvailableSensors = sensorManager.getSensorList(Sensor.TYPE_ALL)
+        SensorList.listOfSensors = listOfAvailableSensors
         recordButton = findViewById(R.id.button)
-        sensorValueText = findViewById(R.id.sensorValues)
         resetButton()
     }
 
