@@ -7,9 +7,9 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/sensorName"
         android:layout_width="242dp"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

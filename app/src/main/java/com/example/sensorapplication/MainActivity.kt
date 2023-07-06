@@ -1,6 +1,7 @@
 package com.example.sensorapplication
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -10,6 +11,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import java.util.Arrays.asList
 import kotlin.system.exitProcess
 
@@ -29,18 +31,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         SensorList.listOfSensors = listOfAvailableSensors
         InUseSensors.listOfInUseSensors = asList(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER))
         recordButton = findViewById(R.id.button)
+        val goToSensorSelectionButton: Button = findViewById(R.id.gotoSensorSelection)
+        goToSensorSelectionButton.setOnClickListener { _: View ->
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
         resetButton()
     }
 
     private fun beginRecording() {
-        for()
-            sensorManager.registerListener(this, motion, SensorManager.SENSOR_DELAY_NORMAL)
-        }
-        recordButton.setOnClickListener { v: View ->
-            sensorManager.unregisterListener(this)
-            recordButton.text = "Record"
-            resetButton()
-        }
+        recordButton.text = "Record"
+        resetButton()
+
 
     }
 

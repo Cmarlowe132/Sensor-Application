@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class SensorListAdapter() : RecyclerView.Adapter<SensorListAdapter.myViewHolder>(){
 
     inner class myViewHolder(myView: View) : RecyclerView.ViewHolder(myView){
-        val sensorName: TextView = myView.findViewById(R.id.sensorType)
+        val sensorName: TextView = myView.findViewById(R.id.sensorName)
         val isSelected: CheckBox = myView.findViewById(R.id.selectionBox)
     }
 
