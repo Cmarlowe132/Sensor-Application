@@ -20,16 +20,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var recordButton: Button
 
     private lateinit var sensorValueText: TextView
-    private lateinit var listOfAvailableSensors: List<Sensor>
+    private val listOfAvailableSensors = SensorList
     private var sensorValues: MutableList<List<Float>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        listOfAvailableSensors = sensorManager.getSensorList(Sensor.TYPE_ALL)
-        SensorList.listOfSensors = listOfAvailableSensors
-        InUseSensors.listOfInUseSensors.add(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER))
+        var listOfSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_ALL)
+        if(listOfAvailableSensors.listOfSensors.size<1) {
+            listOfAvailableSensors.generateList(listOfSensors)
+        }
         recordButton = findViewById(R.id.button)
         val goToSensorSelectionButton: Button = findViewById(R.id.gotoSensorSelection)
         goToSensorSelectionButton.setOnClickListener { _: View ->

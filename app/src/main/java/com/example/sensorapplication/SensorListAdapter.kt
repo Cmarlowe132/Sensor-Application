@@ -14,9 +14,10 @@ class SensorListAdapter() : RecyclerView.Adapter<SensorListAdapter.MyViewHolder>
         val sensorName: TextView = myView.findViewById(R.id.sensorName)
         val isSelected: CheckBox = myView.findViewById(R.id.selectionBox)
 
-        fun bindSensorItemViewHolder(sensor: Sensor) {
-            sensorName.text = sensor.name
-            isSelected.isSelected = InUseSensors.listOfInUseSensors.contains(sensor)
+        fun bindSensorItemViewHolder(sensorItem: SensorItem) {
+            sensorName.text = sensorItem.sensor.name
+            isSelected.setOnCheckedChangeListener(null)
+            isSelected.isSelected = sensorItem.isSelected
 
         }
     }
@@ -31,7 +32,14 @@ class SensorListAdapter() : RecyclerView.Adapter<SensorListAdapter.MyViewHolder>
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindSensorItemViewHolder(SensorList.listOfSensors[position])
+        holder.sensorName.text = SensorList.listOfSensors[position].sensor.name
+        holder.isSelected.setOnCheckedChangeListener(null)
+        holder.isSelected.setChecked(SensorList.listOfSensors[position].isSelected)
+        holder.isSelected.setOnCheckedChangeListener { buttonview, isChecked ->
+            SensorList.listOfSensors[position].isSelected = isChecked
+        }
+
+    //holder.bindSensorItemViewHolder(SensorList.listOfSensors[position])
     }
 
 }
