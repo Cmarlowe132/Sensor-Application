@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         listOfAvailableSensors = sensorManager.getSensorList(Sensor.TYPE_ALL)
         SensorList.listOfSensors = listOfAvailableSensors
-        InUseSensors.listOfInUseSensors = asList(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER))
+        InUseSensors.listOfInUseSensors.add(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER))
         recordButton = findViewById(R.id.button)
         val goToSensorSelectionButton: Button = findViewById(R.id.gotoSensorSelection)
         goToSensorSelectionButton.setOnClickListener { _: View ->

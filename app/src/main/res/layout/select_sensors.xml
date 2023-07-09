@@ -5,30 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listOfSensors"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="1dp"
-        android:addStatesFromChildren="false"
-        android:fadingEdge="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/sensor_container" />
-
     <TextView
         android:id="@+id/availableSensorsText"
+        style="@style/TextAppearance.AppCompat"
         android:layout_width="405dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Available Sensors"
+        android:text="@string/sensor_select_screen"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/listOfSensors"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/acceptButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/button_accept"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="55dp"
+        app:layout_constraintBottom_toTopOf="@id/acceptButton"
+        app:layout_constraintTop_toBottomOf="@id/availableSensorsText">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listOfSensors"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:addStatesFromChildren="false"
+            android:fadingEdge="horizontal"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="10dp"
+            tools:listitem="@layout/sensor_container" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
